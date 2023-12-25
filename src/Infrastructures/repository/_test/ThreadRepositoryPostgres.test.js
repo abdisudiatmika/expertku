@@ -2,7 +2,8 @@ const ThreadRepositoryPostgres = require("../ThreadRepositoryPostgres");
 const UsersTableTestHelper = require("../../../../tests/UsersTableTestHelper");
 const pool = require("../../database/postgres/pool");
 const ThreadsTableTestHelper = require("../../../../tests/ThreadsTableTestHelper");
-
+const AddedThread = require("../../../Domains/threads/entities/AddedThread");
+const NewThread = require("../../../Domains/threads/entities/NewThread");
 describe("ThreadRepositoryPostgres", () => {
   afterEach(async () => {
     await UsersTableTestHelper.cleanTable();
@@ -26,7 +27,7 @@ describe("ThreadRepositoryPostgres", () => {
 
       const userId = "user321";
       await UsersTableTestHelper.addUser({ id: userId });
-      const addThread = new AddThread({
+      const addThread = new NewThread({
         title: "contoh Title",
         body: "contoh Body",
         owner: userId,
@@ -41,14 +42,10 @@ describe("ThreadRepositoryPostgres", () => {
       const thread = await ThreadsTableTestHelper.findThreadById(
         addedThread.id
       );
-      expect(thread).toHaveLength(1);
-      expect(addedThread).toStrictEqual(
-        new AddedThread({
-          id: `thread-${fakeIdGenerator()}`,
-          title: addThread.title,
-          owner: addThread.owner,
-        })
-      );
+      expect(thread.id).toEqual(addedThread.id);
+      expect(thread.title).toEqual(addThread.title);
+      expect(thread.body).toEqual(addThread.body);
+      expect(thread.owner).toEqual(addThread.owner);
     });
   });
 
