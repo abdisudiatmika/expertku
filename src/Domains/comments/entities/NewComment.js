@@ -22,9 +22,6 @@ class NewComment {
     this._content = content;
     this._owner = owner;
   }
-  get threadId() {
-    return this._threadId;
-  }
 
   get content() {
     return this._content;
