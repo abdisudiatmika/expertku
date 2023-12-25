@@ -1,5 +1,7 @@
 const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
 const AddThreadUseCase = require("../AddThreadUseCase");
+const AddedThread = require("../../../Domains/threads/entities/AddedThread");
+const NewThread = require("../../../Domains/threads/entities/NewThread");
 
 describe("AddThreadUseCase", () => {
   it("should orchestrating the add thread action correctly", async () => {
@@ -51,7 +53,7 @@ describe("AddThreadUseCase", () => {
     );
 
     expect(mockThreadRepository.addThread).toBeCalledWith(
-      new AddThread({
+      new NewThread({
         title: useCasePayload.title,
         body: useCasePayload.body,
         owner: useCasePayload.owner,
