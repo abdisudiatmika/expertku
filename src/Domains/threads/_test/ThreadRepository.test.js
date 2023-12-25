@@ -6,13 +6,9 @@ describe("ThreadRepository abstract", () => {
     await expect(threadRepository.addThread({})).rejects.toThrowError(
       "THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
-    await expect(
-      threadRepository.verifyAvailableThreadById("")
-    ).rejects.toThrowError("THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED");
-    await expect(threadRepository.getThreadById("")).rejects.toThrowError(
+    await expect(threadRepository.isThreadExist("")).rejects.toThrowError(
       "THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
-
     /**
      * @TODO 1
      * Lengkapi pengujian untuk `ThreadRepository` abstract
